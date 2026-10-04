@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Um cantinho só seu 🌻</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Segoe UI", sans-serif;
+            background:
+                radial-gradient(circle at top, #ffd8eb 0%, #f8b8d5 35%, #efa5c9 70%, #e795c1 100%);
+            color: #5b2140;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* =========================
+           FLORES / PARTÍCULAS
+        ========================= */
+
+        .petala {
+            position: fixed;
+            top: -30px;
+            font-size: 20px;
+            pointer-events: none;
+            animation: cair linear infinite;
+            opacity: 0.8;
+            z-index: 10;
+        }
+
+        @keyframes cair {
+            to {
+                transform: translateY(110vh) rotate(360deg);
+            }
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .girassol {
+            font-size: 100px;
+            animation: flutuar 3s ease-in-out infinite;
+            filter: drop-shadow(0 10px 15px rgba(160, 70, 110, 0.2));
+        }
+
+        /* =========================
+           GIRASSÓIS REALISTAS DECORATIVOS
+        ========================= */
+
+        .moldura-girassois {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 5;
+            overflow: hidden;
+        }
+
+        .ramo {
+            position: absolute;
+            width: 220px;
+            height: 100vh;
+        }
+
+        .ramo-esquerdo {
+            left: -35px;
+            top: 0;
+        }
+
+        .ramo-direito {
+            right: -35px;
+            top: 0;
+            transform: scaleX(-1);
+        }
+
+        .flor-real {
+            --tamanho: 130px;
+            --giro: 0deg;
+            position: absolute;
+            width: var(--tamanho);
+            height: var(--tamanho);
+            animation:
+                flutuarFlor 5s ease-in-out infinite,
+                girarFlor 18s linear infinite;
+            transform-origin: center;
+            filter: drop-shadow(0 10px 13px rgba(102, 49, 20, .22));
+        }
+
+        .flor-real:nth-child(2) {
+            animation-delay: -2s;
+        }
+
+        .flor-real:nth-child(3) {
+            animation-delay: -4s;
+        }
+
+        .flor-real:nth-child(4) {
+            animation-delay: -1s;
+        }
+
+        .flor-real .petala {
+            position: absolute;
+            width: 34%;
+            height: 52%;
+            left: 33%;
+            top: 4%;
+            border-radius: 55% 55% 42% 42%;
+            background:
+                linear-gradient(180deg,
+                    #ffd84f 0%,
+                    #f6bd24 45%,
+                    #dc8d12 100%);
+            transform-origin: 50% 92%;
+            box-shadow:
+                inset 3px 4px 5px rgba(255, 255, 255, .2),
+                inset -4px -5px 7px rgba(135, 73, 4, .18);
+        }
+
+        .flor-real .petala.p1 {
+            transform: rotate(0deg) translateY(0);
+        }
+
+        .flor-real .petala.p2 {
+            transform: rotate(30deg);
+        }
+
+        .flor-real .petala.p3 {
+            transform: rotate(60deg);
+        }
+
+        .flor-real .petala.p4 {
+            transform: rotate(90deg);
+        }
+
+        .flor-real .petala.p5 {
+            transform: rotate(120deg);
+        }
+
+        .flor-real .petala.p6 {
+            transform: rotate(150deg);
+        }
+
+        .flor-real .petala.p7 {
+            transform: rotate(180deg);
+        }
+
+        .flor-real .petala.p8 {
+            transform: rotate(210deg);
+        }
+
+        .flor-real .petala.p9 {
+            transform: rotate(240deg);
+        }
+
+        .flor-real .petala.p10 {
+            transform: rotate(270deg);
+        }
+
+        .flor-real .petala.p11 {
+            transform: rotate(300deg);
+        }
+
+        .flor-real .petala.p12 {
+            transform: rotate(330deg);
+        }
+
+        .flor-real .miolo {
+            position: absolute;
+            width: 34%;
+            aspect-ratio: 1;
+            left: 33%;
+            top: 33%;
+            border-radius: 50%;
+            background:
+                radial-gradient(circle at 35% 30%, #9a5a20 0 8%, transparent 9%),
+                radial-gradient(circle at 65% 40%, #6f3b13 0 7%, transparent 8%),
+                radial-gradient(circle at 45% 68%, #7d4418 0 7%, transparent 8%),
+                radial-gradient(circle, #8f4d16 0 56%, #5a2b0d 100%);
+            box-shadow:
+                inset 0 5px 8px rgba(255, 255, 255, .08),
+                0 3px 6px rgba(80, 35, 0, .25);
+            z-index: 3;
+        }
+
+        @keyframes flutuarFlor {
+
+            0%,
+            100% {
+                margin-top: 0;
+            }
+
+            50% {
+                margin-top: -8px;
+            }
+        }
+
+        @keyframes girarFlor {
+            from {
+                transform: rotate(var(--giro));
+            }
+
+            to {
+                transform: rotate(calc(var(--giro) + 360deg));
+            }
+        }
+
+        /* Posicionamento ao longo das laterais */
+        .flor-a {
+            --tamanho: 155px;
+            top: 5%;
+            left: 0;
+            --giro: -10deg;
+        }
+
+        .flor-b {
+            --tamanho: 105px;
+            top: 25%;
+            left: 70px;
+            --giro: 12deg;
+        }
+
+        .flor-c {
+            --tamanho: 135px;
+            top: 47%;
+            left: -5px;
+            --giro: -18deg;
+        }
+
+        .flor-d {
+            --tamanho: 95px;
+            top: 70%;
+            left: 78px;
+            --giro: 15deg;
+        }
+
+        .flor-e {
+            --tamanho: 145px;
+            top: 85%;
+            left: 0;
+            --giro: -8deg;
+        }
+
+        @media (max-width: 700px) {
+            .ramo {
+                width: 115px;
+            }
+
+            .flor-real {
+                transform-origin: center;
+            }
+
+            .flor-b,
+            .flor-d {
+                left: 20px;
+            }
+
+            .flor-a,
+            .flor-c,
+            .flor-e {
+                left: -32px;
+            }
+
+            .flor-a {
+                --tamanho: 100px;
+            }
+
+            .flor-b {
+                --tamanho: 75px;
+            }
+
+            .flor-c {
+                --tamanho: 90px;
+            }
+
+            .flor-d {
+                --tamanho: 68px;
+            }
+
+            .flor-e {
+                --tamanho: 95px;
+            }
+        }
+
+        @keyframes flutuar {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(-3deg);
+            }
+
+            50% {
+                transform: translateY(-12px) rotate(3deg);
+            }
+        }
+
+        .hero h1 {
+            font-size: clamp(40px, 8vw, 75px);
+            margin-top: 20px;
+            color: #8d2859;
+        }
+
+        .hero p {
+            max-width: 700px;
+            font-size: 20px;
+            line-height: 1.7;
+            margin-top: 20px;
+        }
+
+        .botao {
+            margin-top: 35px;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 40px;
+            background: #ffffff;
+            color: #a32964;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(116, 30, 74, 0.2);
+            transition: 0.3s;
+        }
+
+        .botao:hover {
+            transform: translateY(-4px) scale(1.03);
+        }
+
+        /* =========================
+           SEÇÕES
+        ========================= */
+
+        section {
+            padding: 90px 20px;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: auto;
+        }
+
+        .titulo {
+            text-align: center;
+            color: #8d2859;
+            font-size: 38px;
+            margin-bottom: 50px;
+        }
+
+        /* =========================
+           FOTO
+        ========================= */
+
+        .foto-area {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .foto {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 8px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 15px 40px rgba(99, 27, 63, 0.2);
+        }
+
+        /* =========================
+           CARDS
+        ========================= */
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: 0 12px 35px rgba(100, 30, 65, 0.1);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+        }
+
+        .card .icone {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            color: #9b2f62;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            line-height: 1.6;
+        }
+
+        /* =========================
+           CARTA
+        ========================= */
+
+        .carta-container {
+            text-align: center;
+        }
+
+        #carta {
+            display: none;
+            background: rgba(255, 255, 255, 0.88);
+            padding: 35px;
+            margin-top: 30px;
+            border-radius: 25px;
+            text-align: left;
+            line-height: 1.8;
+            box-shadow: 0 15px 40px rgba(100, 30, 65, 0.15);
+            animation: aparecer 0.8s ease;
+        }
+
+        #carta p {
+            margin-bottom: 18px;
+        }
+
+        @keyframes aparecer {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* =========================
+           FINAL
+        ========================= */
+
+        .final {
+            text-align: center;
+            min-height: 70vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .final-box {
+            max-width: 700px;
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(10px);
+            padding: 50px 30px;
+            border-radius: 30px;
+        }
+
+        .final-box h2 {
+            font-size: 40px;
+            color: #8d2859;
+            margin-bottom: 20px;
+        }
+
+        .coracao {
+            font-size: 55px;
+            animation: pulsar 1.5s infinite;
+        }
+
+        @keyframes pulsar {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.15);
+            }
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #7b3155;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- GIRASSÓIS REALISTAS NAS LATERAIS -->
+
+    <div class="moldura-girassois" aria-hidden="true">
+
+        <!-- Lado esquerdo -->
+        <div class="ramo ramo-esquerdo">
+
+            <div class="flor-real flor-a">
+                <span class="petala p1"></span><span class="petala p2"></span>
+                <span class="petala p3"></span><span class="petala p4"></span>
+                <span class="petala p5"></span><span class="petala p6"></span>
+                <span class="petala p7"></span><span class="petala p8"></span>
+                <span class="petala p9"></span><span class="petala p10"></span>
+                <span class="petala p11"></span><span class="petala p12"></span>
+                <span class="miolo"></span>
+            </div>
+
+            <div class="flor-real flor-b">
+                <span class="petala p1"></span><span class="petala p2"></span>
+                <span class="petala p3"></span><span class="petala p4"></span>
+                <span class="petala p5"></span><span class="petala p6"></span>
+                <span class="petala p7"></span><span class="petala p8"></span>
+                <span class="petala p9"></span><span class="petala p10"></span>
+                <span class="petala p11"></span><span class="petala p12"></span>
+                <span class="miolo"></span>
+            </div>
+
+            <div class="flor-real flor-c">
+                <span class="petala p1"></span><span class="petala p2"></span>
+                <span class="petala p3"></span><span class="petala p4"></span>
+                <span class="petala p5"></span><span class="petala p6"></span>
+                <span class="petala p7"></span><span class="petala p8"></span>
+                <span class="petala p9"></span><span class="petala p10"></span>
+                <span class="petala p11"></span><span class="petala p12"></span>
+                <span class="miolo"></span>
+            </div>
+
+            <div class="flor-real flor-d">
+                <span class="petala p1"></span><span class="petala p2"></span>
+                <span class="petala p3"></span><span class="petala p4"></span>
+                <span class="petala p5"></span><span class="petala p6"></span>
+                <span class="petala p7"></span><span class="petala p8"></span>
+                <span class="petala p9"></span><span class="petala p10"></span>
+                <span class="petala p11"></span><span class="petala p12"></span>
+                <span class="miolo"></span>
+            </div>
+
+            <div class="flor-real flor-e">
+                <span class="petala p1"></span><span class="petala p2"></span>
+                <span class="petala p3"></span><span class="petala p4"></span>
+                <span class="petala p5"></span><span class="petala p6"></span>
+                <span class="petala p7"></span><span class="petala p8"></span>
+                <span class="petala p9"></span><span class="petala p10"></span>
+                <span class="petala p11"></span><span class="petala p12"></span>
+                <span class="miolo"></span>
+            </div>
+
+        </div>
+
+        <!-- Lado direito: mesma composição espelhada -->
+        <div class="ramo ramo-direito">
+
+            <div class="flor-real flor-a">
+                <span class="petala p1"></span><span class="petala p2"></span>
+                <span class="petala p3"></span><span class="petala p4"></span>
+                <span class="petala p5"></span><span class="petala p6"></span>
+                <span class="petala p7"></span><span class="petala p8"></span>
+                <span class="petala p9"></span><span class="petala p10"></span>
+                <span class="petala p11"></span><span class="petala p12"></span>
+                <span class="miolo"></span>
+            </div>
+
+            <div class="flor-real flor-b">
+                <span class="petala p1"></span><span class="petala p2"></span>
+                <span class="petala p3"></span><span class="petala p4"></span>
+                <span class="petala p5"></span><span class="petala p6"></span>
+                <span class="petala p7"></span><span class="petala p8"></span>
+                <span class="petala p9"></span><span class="petala p10"></span>
+                <span class="petala p11"></span><span class="petala p12"></span>
+                <span class="miolo"></span>
+            </div>
+
+            <div class="flor-real flor-c">
+                <span class="petala p1"></span><span class="petala p2"></span>
+                <span class="petala p3"></span><span class="petala p4"></span>
+                <span class="petala p5"></span><span class="petala p6"></span>
+                <span class="petala p7"></span><span class="petala p8"></span>
+                <span class="petala p9"></span><span class="petala p10"></span>
+                <span class="petala p11"></span><span class="petala p12"></span>
+                <span class="miolo"></span>
+            </div>
+
+            <div class="flor-real flor-d">
+                <span class="petala p1"></span><span class="petala p2"></span>
+                <span class="petala p3"></span><span class="petala p4"></span>
+                <span class="petala p5"></span><span class="petala p6"></span>
+                <span class="petala p7"></span><span class="petala p8"></span>
+                <span class="petala p9"></span><span class="petala p10"></span>
+                <span class="petala p11"></span><span class="petala p12"></span>
+                <span class="miolo"></span>
+            </div>
+
+            <div class="flor-real flor-e">
+                <span class="petala p1"></span><span class="petala p2"></span>
+                <span class="petala p3"></span><span class="petala p4"></span>
+                <span class="petala p5"></span><span class="petala p6"></span>
+                <span class="petala p7"></span><span class="petala p8"></span>
+                <span class="petala p9"></span><span class="petala p10"></span>
+                <span class="petala p11"></span><span class="petala p12"></span>
+                <span class="miolo"></span>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- PETALAS -->
+    <div class="petala" style="left:10%; animation-duration:8s;">🌸</div>
+    <div class="petala" style="left:25%; animation-duration:10s; animation-delay:2s;">💗</div>
+    <div class="petala" style="left:42%; animation-duration:7s; animation-delay:1s;">🌸</div>
+    <div class="petala" style="left:60%; animation-duration:9s; animation-delay:3s;">✨</div>
+    <div class="petala" style="left:78%; animation-duration:11s;">🌸</div>
+    <div class="petala" style="left:90%; animation-duration:8s; animation-delay:4s;">💗</div>
+
+
+    <!-- HERO -->
+
+    <header class="hero">
+
+        <div class="girassol">🌻</div>
+
+        <h1>Um cantinho só seu</h1>
+
+        <p>
+            Eu fiz esse pequeno lugar porque queria te lembrar
+            que mesmo nos dias difíceis, você continua sendo
+            alguém muito especial para mim.
+        </p>
+
+        <button class="botao" onclick="document.getElementById('sobre').scrollIntoView()">
+            Entra comigo 🌸
+        </button>
+
+    </header>
+
+
+    <!-- SOBRE ELA -->
+
+    <section id="sobre">
+
+        <div class="container">
+
+            <div class="foto-area">
+
+                <!-- Troque pelo nome da foto dela -->
+                <img src="imagem_da_minha_gatinha.jpg" alt="Uma foto dela" class="foto">
+
+            </div>
+
+            <h2 class="titulo">
+                Algumas coisas que fazem você ser você
+            </h2>
+
+
+            <div class="cards">
+
+                <div class="card">
+
+                    <div class="icone">🌻</div>
+
+                    <h3>Seu jeito</h3>
+
+                    <p>
+                        Não tem nada nesse mundo que me faça amar mais você
+                        do seu jeito unico de ser.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="icone">💗</div>
+
+                    <h3>Seu sorriso</h3>
+
+                    <p>
+                        Seu sorriso me faz acordar cada dia mais feliz
+                        e cheio de vontade de lutar e continuar.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="icone">✨</div>
+
+                    <h3>Seus detalhes</h3>
+
+                    <p>
+                        Cada detalhe em você e importante, seus olhos encantadores,
+                        sua alegria com coisas que gosta e a forma como sonha e espetacular.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CARTA -->
+
+    <section>
+
+        <div class="container carta-container">
+
+            <h2 class="titulo">
+                Tem uma coisa que eu queria te dizer...
+            </h2>
+
+            <button class="botao" onclick="abrirCarta()">
+                Abrir carta 💌
+            </button>
+
+
+            <div id="carta">
+
+                <p>
+                    Eu não fiz esse cantinho porque acho que preciso
+                    consertar tudo que está acontecendo.
+                </p>
+
+                <p>
+                    Também não fiz para fingir que os dias difíceis
+                    não existem.
+                </p>
+
+                <p>
+                    Fiz porque eu sei que às vezes parece que um dia
+                    ruim vem atrás do outro, e algumas coisas acabam
+                    pesando mais do que a gente gostaria.
+                </p>
+
+                <p>
+                    E no meio de tudo isso, eu só queria te lembrar
+                    de uma coisa:
+                </p>
+
+                <p>
+                    <strong>você é muito importante para mim.</strong>
+                </p>
+
+                <p>
+                    Eu gosto do seu jeito, das suas pequenas manias,
+                    das coisas que fazem você ser você.
+                </p>
+
+                <p>
+                    Sei que esta passando muita coisa pela sua cabeça
+                    sei que varias delas tem te machucado aos poucos
+                    mas independente disso.
+                </p>
+
+                <p>
+                    Quero que você saiba que eu continuo aqui.
+                </p>
+
+                <p>
+                    Mesmo nos dias em que
+                    você não consegue enxergar muita coisa boa,
+                    ainda existem pessoas que enxergam coisas lindas em você.
+                </p>
+
+                <p>
+                    E eu sou uma delas.
+                </p>
+
+                <p>
+                    Então esse site é só um pequeno pedacinho do
+                    carinho que eu queria conseguir te entregar hoje.
+                </p>
+
+                <p>
+                    Espero que, nem que seja por alguns minutos,
+                    ele consiga colocar um sorriso no seu rosto.
+                </p>
+
+                <p>
+                    E espero que você nunca esqueça:
+                </p>
+
+                <p>
+                    <strong>
+                        você merece dias leves, momentos bonitos
+                        e muito carinho.
+                    </strong>
+                </p>
+
+                <p>
+                    Com carinho,<br>
+                    <strong>Seu professor de Geografia. 🌻</strong>
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FINAL -->
+
+    <section class="final">
+
+        <div class="final-box">
+
+            <div class="coracao">💗</div>
+
+            <h2>Cuida de você, tá?</h2>
+
+            <p>
+                E mesmo que hoje não esteja sendo um dia bom,
+                espero que amanhã seja um pouquinho mais leve.
+            </p>
+
+            <div class="girassol">🌻</div>
+
+        </div>
+
+    </section>
+
+
+    <footer>
+        Feito com carinho, especialmente para você. 🌸
+    </footer>
+
+
+    <script>
+
+        function abrirCarta() {
+
+            const carta = document.getElementById("carta");
+
+            if (carta.style.display === "block") {
+
+                carta.style.display = "none";
+
+            } else {
+
+                carta.style.display = "block";
+
+                setTimeout(() => {
+                    carta.scrollIntoView({
+                        behavior: "smooth",
+                        block: "center"
+                    });
+                }, 100);
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>
